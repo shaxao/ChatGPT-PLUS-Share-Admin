@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>无权限</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .no-permission-container {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            transform: scale(1);
+            animation: float 3s infinite;
+        }
+
+        .no-permission-container h1 {
+            color: #ff0000;
+            margin: 0;
+        }
+
+        .no-permission-container p {
+            color: #333;
+        }
+
+        .no-permission-container a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #007BFF;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .no-permission-container a:hover {
+            background-color: #0056b3;
+        }
+
+        @keyframes float {
+            0% {
+                transform: scale(1);
+                box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            }
+            50% {
+                transform: scale(1.03);
+                box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.1);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="no-permission-container">
+    <h1>无权限!</h1>
+    <p>很抱歉，您无权访问该页面，请联系管理员</p>
+    <a th:href="@{./index.html}">返回主页</a>
+</div>
+</body>
+</html>

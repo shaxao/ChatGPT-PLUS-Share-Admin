@@ -1,0 +1,266 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f5f5f5; /* 更改背景颜色为更柔和的色调 */
+}
+
+.input-text::placeholder {
+    font-size: 0.9375rem;
+}
+
+/* 媒体查询，适用于屏幕宽度小于384px的设备 */
+@media screen and (max-width: 384px) {
+
+    .logo-container img,
+    .login-container,
+    .register-container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .logo-container img {
+        max-width: 100px;
+    }
+
+    label,
+    .password-info,
+    .login-link,
+    .register-link,
+    button {
+        font-size: 0.75rem;
+    }
+
+    button {
+        padding: 10px;
+    }
+}
+
+/* Logo 样式 */
+.logo-container {
+    margin-top: 50px;
+}
+
+.logo-container img {
+    max-width: 200px;
+    max-height: 100px;
+}
+
+.login-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin: 20px 0 8px;
+    color: #666;
+    font-weight: 600; /* 增加字体粗细 */
+}
+
+.input-text {
+    width: 100%;
+    height: 6vh;
+    border:  1px solid #ddd;
+    border-radius: 50px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    font-size: 20px;
+    outline: none;
+    font-family: PlastoTrial_ExtraLight;
+}
+
+/**
+眼睛，显示密码
+ */
+.eye-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.eye-icon i {
+    font-size: 18px;
+    color: #000;
+    margin-left: 10px;
+    display: none;
+}
+
+.eye-icon i.fa-eye-slash {
+    display: inline;
+}
+
+.button-confirm {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 添加按钮阴影 */
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* ... 上面的样式保持不变 ... */
+
+
+.forget-link {
+    color: #ff5556;
+    text-decoration: none;
+    font-size: 10px;
+}
+
+.forget-link:hover {
+    text-decoration: underline;
+}
+
+
+.register-link {
+    margin-top: 16px;
+    color: #666;
+}
+
+.register-link a {
+    color: #4caf50;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+.register-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+    margin-top: 20px;
+}
+.login-container h2, .register-container h2 {
+    color: #333;
+    font-weight: 600; /* 增加字体粗细 */
+}
+
+
+/* ... 注册新增加 ... */
+
+.password-info {
+    font-size: 14px;
+    color: #888;
+    margin-top: -10px;
+    margin-bottom: 16px;
+}
+
+.login-link {
+    margin-top: 16px;
+    color: #666;
+}
+
+.login-link a {
+    color: #4caf50;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* ... 验证新增加 ... */
+
+.input-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 16px;
+    position: relative; /* 添加相对定位 */
+}
+
+.ver-text {
+    flex-grow: 1;
+    border: 1px solid #000;
+    border-radius: 50px;
+    padding: 10px 20px; /* 调整内边距 */
+}
+
+.ver-button {
+    border-radius: 0 4px 4px 0;
+    height: 38px;
+    border: 1px solid #ccc;
+    border-left: none;
+    cursor: pointer;
+    background-color: #4caf50;
+    color: #fff;
+    font-size: 16px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* 添加阴影过渡 */
+    padding: 10px 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 添加按钮阴影 */
+}
+
+.ver-button:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* 添加悬停时的阴影效果 */
+}
+
+#countdownTimer {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 14px;
+}
+
+.validation-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+}
+
+/*.validation-icon.valid {*/
+/*    background-image: url('/images/green.png'); !* 用绿色勾的图片替换 *!*/
+/*}*/
+
+/*.validation-icon.invalid {*/
+/*    background-image: url('/images/red.png'); !* 用红色叉的图片替换 *!*/
+/*}*/
+
+#passwordInfo {
+    color: #f00;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 16px;
+}
+
+#verifyCodeBtn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#registerBtn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#resetBtn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+

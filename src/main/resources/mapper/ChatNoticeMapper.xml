@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.louwei.gptresource.mapper.ChatNoticeMapper">
+
+    <resultMap id="BaseResultMap" type="com.louwei.gptresource.domain.ChatNotice">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="message" column="message" jdbcType="VARCHAR"/>
+            <result property="isEnabled" column="is_enabled" jdbcType="TINYINT"/>
+            <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,message,is_enabled,
+        created_at
+    </sql>
+</mapper>

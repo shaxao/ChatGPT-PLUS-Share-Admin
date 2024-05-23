@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <title>商品页面</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+<div class="header">
+    <a th:href="@{index.html}"><img th:src="@{/svg/home.svg}" alt="Logo" class="logo"></a>
+    <div class="user-center">
+        <span>欢迎, <!--/*@thymesVar id="username" type="com.louwei.gptresource.domain.ChatUsers"*/-->
+        <span th:text="${username}">用户名</span></span>
+        <button id="logout">退出登录</button>
+    </div>
+</div>
+
+<!--/*@thymesVar id="products" type="com.louwei.gptresource.vo.ChatProductReqVo"*/-->
+<div class="product-list">
+    <div class="product-item"  th:attr="data-id=${product.id}" th:each="product : ${products}">
+        <!--/*@thymesVar id="imageUrl" type="com.louwei.gptresource.domain.ChatProduct"*/-->
+        <div class="product-image">
+            <img th:src="${product.imageUrl}" alt="商品图片">
+        </div>
+        <div class="product-info">
+            <h2 th:text="${product.title}">商品标题</h2>
+            <p class="sub">
+                <span class="subtitle">限时秒杀</span>
+                <span class="subtitle">库存充足</span>
+            </p>
+            <p class="price" th:text="'¥' + ${product.price}">¥10.00</p>
+            <p class="stock" th:text="'库存: ' + ${product.stock}">库存: 4</p>
+        </div>
+    </div>
+</div>
+
+<div class="fixed-button">
+    <button id="order-query" th:attr="data-name=${username}">查询订单</button>
+</div>
+
+<script th:src="@{/js/index.js}"></script>
+</body>
+</html>

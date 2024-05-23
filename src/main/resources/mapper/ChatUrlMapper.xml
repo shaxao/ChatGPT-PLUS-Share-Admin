@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.louwei.gptresource.mapper.ChatUrlMapper">
+
+    <resultMap id="BaseResultMap" type="com.louwei.gptresource.domain.ChatUrl">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="routePath" column="route_path" jdbcType="VARCHAR"/>
+            <result property="pageDescription" column="page_description" jdbcType="VARCHAR"/>
+            <result property="routeStatus" column="route_status" jdbcType="VARCHAR"/>
+            <result property="parentMenu" column="parent_menu" jdbcType="INTEGER"/>
+            <result property="childMenu" column="child_menu" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,route_path,page_description,
+        route_status,parent_menu,child_menu
+    </sql>
+</mapper>

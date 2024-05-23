@@ -1,0 +1,326 @@
+/* styles.css */
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+}
+/* styles.css */
+
+/* ... (之前的样式) */
+
+#sidebarTop {
+    margin-bottom: 20px;
+    height: 4%;
+}
+
+#sidebar {
+    flex: 0 0 16%; /* 不可伸缩，固定宽度为 16% */
+    background-color: #000;
+    color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+
+
+#logoAndNewChat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logoImg {
+    margin-right: 10px; /* 你可以根据需要调整间距 */
+}
+
+
+#logoAndNewChat:hover{
+    background-color: #333;  /* 悬停时的背景颜色 */
+    border-radius: 5px;  /* 可以根据需要设置圆角半径 */
+}
+
+#logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+#newChatText {
+    flex: 1;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+#editIcon {
+    cursor: pointer;
+}
+
+#sidebarBottom {
+    margin-top: auto;
+    height: 6%;
+    padding-top: 10px;
+}
+
+#timeCategories {
+    margin-bottom: 10px;
+}
+
+.timeCategory {
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+#userDetails {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 5px;
+}
+#userDetails:hover {
+    background-color: #333;  /* 悬停时的背景颜色 */
+    border-radius: 5px;  /* 可以根据需要设置圆角半径 */
+}
+
+#userDetails img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+#username {
+    font-weight: bold;
+}
+
+#bottomOptions {
+    cursor: pointer;
+}
+
+.optionText {
+    margin-right: 10px;
+}
+
+/* ... (之后的样式) */
+
+#chatContainer {
+    display: flex;
+    height: 100vh;
+    overflow: hidden; /* 禁止整个页面滚动 */
+}
+#sidebarMiddle {
+    margin-bottom: 20px;
+    height: calc(100% - 135px); /* 100%减去上下两部分的高度和边距 */
+}
+
+
+#chatTitles {
+    height: 200px;
+    overflow-y: auto;
+    padding-right: 20px; /* Scrollbar space */
+}
+
+.chatTitle {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.titleText {
+    flex: 1;
+}
+
+.optionsIcon {
+    cursor: pointer;
+}
+
+.chatTitle:hover {
+    background-color: #333;  /* 悬停时的背景颜色 */
+    border-radius: 5px;  /* 可以根据需要设置圆角半径 */
+}
+
+hr {
+    border: 0.5px solid #666;
+    margin: 10px 0;
+}
+
+
+
+/*聊天模块*/
+#chatWindow {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #fff;
+}
+
+#messageDisplay {
+    /* ... (same as before) */
+}
+
+.message {
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+/* 修改原有的样式 */
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.user-info img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* 修改原有的样式 */
+.username {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.user-content {
+    background-color: #e0e0e0;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+.bot-content {
+    background-color: #e0e0e0;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 20px;
+}
+
+.edit-icon {
+    display: none;
+    color: #000;
+}
+
+.user-content:hover + .edit-icon,
+.edit-icon:hover {
+    display: inline;
+}
+
+.user-content:hover + .edit-icon {
+    color: #aaa;
+}
+
+
+.received .content {
+    background-color: #fff;
+}
+.sent .content {
+    background-color: #fff;
+}
+
+/*新的聊天*/
+
+.chat-box {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin: 10px;
+    width: calc(100% - 40%);
+    max-width: 50%; /* 根据需要调整宽度 */
+    border: 1px solid #ccc;
+    border-radius: 25px; /* 添加圆角 */
+    right: 10%;
+}
+.file-input {
+    display: none; /* 隐藏默认的文件输入 */
+}
+.custom-file-upload {
+    border: none; /* 移除边框 */
+    padding: 6px 12px;
+    cursor: pointer;
+    margin-right: 10px;
+    border-radius: 4px; /* 添加圆角 */
+}
+#message {
+    flex: 1;
+    border: none; /* 移除边框 */
+    padding: 8px;
+    resize: none; /* 防止用户调整大小 */
+    overflow: hidden; /* 超出部分隐藏 */
+    outline: none; /* 移除焦点时的轮廓 */
+    min-height: 25px; /* 设置最小高度 */
+    font-size: 15px;
+}
+.send-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px; /* 添加圆角 */
+    white-space: nowrap; /* 防止文字换行 */
+}
+/*新的聊天*/
+
+#messageInputContainer {
+    position: fixed;
+    bottom: 0;
+    right: 3%; /* 调整 left 为 right */
+    width: calc(100% - 40%); /* 占据除了sidebar之外的宽度 */
+    background-color: #fff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    margin-bottom: 45px;
+}
+
+#messageInput {
+    display: flex;
+    flex-direction: row-reverse; /* 反转子元素的方向 */
+    align-items: center; /* 垂直居中 */
+    justify-content: space-between; /* 子元素两端对齐 */
+    width: 100%; /* 充满整个容器 */
+}
+#fileButton {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+#fileButton img {
+    width: 20px;
+    height: 20px;
+}
+
+
+#fileButton {
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+}
+
+
+#fileButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+
+/* 设置底部文字的样式 */
+.bottom-text {
+    color: #000; /* 设置文字颜色为黑色 */
+    font-size: 10px; /* 设置文字大小为14像素 */
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: calc(100% - 40%);
+}

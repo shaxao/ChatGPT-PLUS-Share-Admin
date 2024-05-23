@@ -1,0 +1,214 @@
+/* 全局样式 */
+body, h2, p {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f7f7f7;
+}
+
+/* 头部样式 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #005b96;
+  color: white;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.logo {
+  height: 50px; /* 调整为实际大小 */
+}
+
+.user-center {
+  display: flex;
+  align-items: center;
+}
+
+#username {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+#logout {
+  padding: 8px 16px;
+  background-color: #e1ecf4;
+  color: #005b96;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#logout:hover {
+  background-color: #d0e3f0;
+}
+/* 商品列表样式 */
+.product-list {
+  display: grid; /* 使用网格布局 */
+  grid-template-columns: repeat(4, 1fr); /* 三列布局，每列占据等宽空间 */
+  gap: 15px; /* 项目之间的间隙稍微增大一点 */
+  padding: 20px 25px; /* 周边填充，上下边距20px，左右边距30px，两侧距离更大 */
+  margin: 0 auto; /* 水平居中 */
+  max-width: 1100px; /* 最大宽度，适当调整 */
+}
+
+
+/* 商品项样式 */
+.product-item {
+  height: 380px;
+  background: #fff; /* 白色背景 */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* 增加阴影 */
+  transition: all 0.3s ease; /* 添加过渡效果 */
+  border-radius: 10px; /* 圆角边框 */
+  overflow: hidden; /* 隐藏溢出内容 */
+  display: flex; /* 使用flex布局 */
+  flex-direction: column; /* 垂直排列 */
+  color: #333; /* 文字颜色为深灰色 */
+  padding: 20px; /* 适当的内边距 */
+  text-align: center; /* 文字居中对齐 */
+  position: relative; /* 相对定位，用于文字装饰 */
+}
+
+.product-item:hover {
+  transform: scale(1.05); /* 鼠标悬停时放大 */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3); /* 增强阴影 */
+}
+
+.product-item::before {
+  content: ""; /* 添加伪元素 */
+  position: absolute; /* 绝对定位，相对于.product-item */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px dashed #ffa726; /* 虚线边框 */
+  z-index: -1; /* 放置在底层 */
+}
+
+
+.product-image {
+  flex-grow: 1; /* 图片占据剩余空间 */
+  width: 100%; /* 图片宽度100% */
+  height: auto; /* 高度自适应 */
+}
+
+
+.title {
+  font-size: 1.5em; /* 增大字体大小 */
+  margin: 10px 0; /* 增加间距 */
+  color: #0b0909; /* 标题文字颜色 */
+  position: relative; /* 相对定位，用于文字装饰 */
+}
+.title::before {
+  content: "🔥"; /* 添加火焰图标 */
+  position: absolute; /* 绝对定位，相对于.title */
+  top: -8px; /* 上方偏移量 */
+  left: 100%; /* 水平居中 */
+  transform: translateX(-50%); /* 水平居中 */
+  font-size: 1.5em; /* 图标大小 */
+  animation: burn 1s infinite alternate; /* 添加火焰燃烧动画效果 */
+}
+
+.subtitle {
+  font-size: 0.2em; /* 较小的字体大小 */
+  color: #777; /* 次要文字颜色 */
+  margin-top: 5px; /* 顶部间距 */
+  display: inline-block; /* 内联元素，使得横向排列 */
+  padding: 5px 10px; /* 添加内边距 */
+  background-color: #ff6b6b; /* 背景颜色 */
+  color: #fff; /* 文字颜色 */
+  border-radius: 5px; /* 圆角边框 */
+  margin-right: 5px; /* 右侧间距 */
+  animation: flame 1s infinite alternate; /* 添加火焰动画效果 */
+}
+
+@keyframes burn {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes flame {
+  from {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  to {
+    opacity: 0.7;
+    transform: scaleY(1.1);
+  }
+}
+
+.sub {
+  font-size: 0.1em; /* 增大字体大小 */
+}
+
+
+.product-item img {
+  height: auto; /* 高度自动 */
+  max-height: 100%; /* 最大高度为父元素高度 */
+  object-fit: contain; /* 保持图片比例 */
+}
+
+.product-info {
+  flex-grow: 1; /* 信息部分填充剩余空间 */
+  padding: 20px; /* 适当的内边距 */
+  display: flex;
+  flex-direction: column; /* 以列的方式堆叠信息 */
+  justify-content: center; /* 垂直居中 */
+  align-items: flex-start; /* 左对齐文本 */
+}
+
+.price {
+  font-size: 1.5em; /* 增大字体大小 */
+  margin: 10px 0; /* 增加间距 */
+  color: #ff6b6b; /* 价格文字颜色 */
+}
+
+.stock {
+  font-size: 1.0em; /* 增大字体大小 */
+  margin: 10px 0;
+  color: #764e12; /* 库存文字颜色 */
+}
+
+/* 响应式布局调整 */
+@media (max-width: 768px) {
+  .product-item {
+    flex-direction: column; /* 在较小屏幕上以列布局显示 */
+    align-items: stretch; /* 子项拉伸填满宽度 */
+  }
+
+  .product-image {
+    width: auto; /* 图片宽度自动 */
+    height: 200px; /* 设置固定高度 */
+  }
+}
+
+.fixed-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#order-query {
+  padding: 12px 24px;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#order-query:hover {
+  background-color: #229954;
+}
+

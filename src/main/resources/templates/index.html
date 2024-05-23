@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导航页</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding-bottom: 70px; /* 留出足够空间给固定的页脚 */
+        }
+
+        .header {
+            background-color: #ffffff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header .logo {
+            height: 50px; /* 或者您所需的任何尺寸 */
+        }
+
+        .user-center {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .user-center span {
+            margin-right: 20px;
+        }
+
+        #logout {
+            padding: 5px 15px;
+            background-color: #e1ecf4;
+            color: #005b96;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+
+        .card h2 {
+            margin-top: 0;
+            color: #333333;
+            display: flex; /* 使用 flex 布局 */
+            align-items: center; /* 垂直居中 */
+        }
+
+        .card h2::before {
+            content: "🌟"; /* 在标题前添加符号 */
+            margin-right: 8px;
+        }
+
+        .card:nth-child(2) h2::before {
+            content: "🔥"; /* 第二个卡片使用不同的符号 */
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #333333;
+        }
+
+        .username-text {
+            color: #cc4a33;
+            font-style: italic;
+        }
+
+        .user-greeting {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .card a {
+            display: block;
+            text-decoration: none;
+            color: #007bff;
+            background-color: #f8f9fa;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            transition: color 0.2s, background-color 0.2s;
+            text-align: center; /* 文本居中 */
+        }
+
+        /*pointer-events: none; !* 阻止点击事件 *!*/
+        .disabled-link {
+            color: grey; /* 改变颜色 */
+            text-decoration: none; /* 去除下划线 */
+            cursor: default; /* 改变光标形状 */
+        }
+
+        #toastContainer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1050;
+            pointer-events: none;
+        }
+
+        .toast {
+            pointer-events: auto;
+            margin-bottom: 10px; /* 每个 toast 之间的间距 */
+            font-weight: 700;
+        }
+
+        .card a:hover {
+            color: #fff;
+            background-color: #0069d9;
+            text-decoration: none;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #fff;
+            color: #333;
+            text-align: center;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 媒体查询，针对手机和小屏设备的样式 */
+        @media (max-width: 600px) {
+            .header, .main-content, .footer {
+                padding: 10px;
+            }
+
+            .header .logo {
+                height: 40px; /* 手机端更小的logo */
+            }
+
+            .user-center span {
+                display: none; /* 减少文字，为按钮节省空间 */
+            }
+
+            #logout {
+                padding: 5px 10px; /* 更小的按钮 */
+            }
+
+            .card {
+                padding: 15px; /* 手机端适合的padding */
+            }
+
+            .card a {
+                margin: 8px 0;
+            }
+
+            .footer {
+                padding: 8px 0; /* 手机端适合的padding */
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <img th:src="@{/images/muhuo-logo.png}" alt="Logo" class="logo">
+    <div class="user-center">
+        <span class="user-greeting">你好, <!--/*@thymesVar id="username" type="com.louwei.gptresource.domain.ChatUsers"*/-->
+        <span th:text="${username}" class="username-text">用户名</span></span>
+        <button id="logout" th:text="${username != null and username != ''} ? '退出登录' : '请登录'">退出登录</button>
+    </div>
+</div>
+<!-- Toast container -->
+<div id="toastContainer"></div>
+
+
+<div class="main-content">
+    <div class="card">
+        <h2>尊享ChatGPT</h2>
+        <th:block th:with="finalUrl=${userStatus == '会员' ? vipuse : '#'}">
+            <a th:href="@{${finalUrl}}" th:class="${userStatus != '会员' ? 'disabled-link' : ''}" th:data-is-member="${userStatus == '会员'}"
+                onclick="checkMembership(this)">畅享ChatGpt</a>
+        </th:block>
+        <th:block th:with="finalUrl=${userStatus == '会员' ? tokenLogin : '#'}">
+            <a th:href="@{${finalUrl}}" th:class="${userStatus != '会员' ? 'disabled-link' : ''}" th:data-is-member="${userStatus == '会员'}"
+               onclick="checkMembership(this)">Token登录专享</a>
+        </th:block>
+        <h2>木火的小店</h2>
+        <a th:href="@{${qshop}}">购买账号</a>
+        <h2>API_kEY区(密码:muhuo)</h2>
+        <a th:href="@{${freechat1}}">ChatNio(FreeGpt3.5)</a>
+        <a th:href="@{${freechat2}}">LobeChat(FreeGpt4)</a>
+        <a th:href="@{${freechat4}}">NextChat(FreeGpt4)</a>
+        <a th:href="@{${freechat3}}">BingAI</a>
+    </div>
+</div>
+
+<div class="footer">
+    <p>Powered by Muhuo</p>
+</div>
+<script>
+    function checkMembership(element) {
+        var isMember = element.getAttribute('data-is-member') === 'true';
+        // const finalUrl = getFinalUrl();
+        // console.log("finalUrl:", finalUrl)
+        if (!isMember) {
+            alert('请开通会员或者登陆后使用');
+            return false;
+        }
+
+    }
+
+    // function postUrl(finalUrl) {
+    //     fetch("/auth/pandora", { method: "GET" })
+    // }
+    //
+    // // 定义一个函数来检查用户状态并获取finalUrl的值
+    // function getFinalUrl() {
+    //     // 获取包含finalUrl的<a>元素
+    //     var linkElement = document.querySelector('a[data-is-member="true"]');
+    //
+    //     // 检查元素是否存在并且用户是会员
+    //     if (linkElement && linkElement.dataset.isMember === 'true') {
+    //         // 返回finalUrl的值
+    //         return linkElement.getAttribute('href');
+    //     } else {
+    //         // 如果不是会员或者元素不存在，返回null或其他适当的值
+    //         return "#";
+    //     }
+    // }
+</script>
+
+<script th:src="@{/js/index.js}"></script>
+</body>
+</html>

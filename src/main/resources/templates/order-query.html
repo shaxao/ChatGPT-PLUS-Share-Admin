@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <title>订单详情</title>
+    <link rel="stylesheet" th:href="@{/css/order-style.css}">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <div class="header-content">
+            <h1>订单详情</h1>
+            <p>查看和管理您的所有订单</p>
+        </div>
+    </header>
+    <div class="order-details">
+        <table id="order-table">
+            <!-- 表格数据通过 JavaScript 动态填充 -->
+            <thead>
+            <tr>
+                <th>订单ID</th>
+                <th>商品名称</th>
+                <th>创建时间</th>
+                <th>过期时间</th>
+                <th>价格</th>
+                <th>订单状态</th>
+                <th>获取</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 使用 Thymeleaf 的 th:each 遍历集合 -->
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.id}"></td>
+                <td th:text="${order.productName}"></td>
+                <td th:text="${#dates.format(order.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td th:text="${#dates.format(order.expireTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td th:text="${order.price}"></td>
+                <td th:text="${order.orderStatus}"></td>
+                <td><!-- 添加刷新按钮，仅在订单状态为“已支付”时显示 -->
+                    <span th:if="${order.orderStatus == '已支付'}">
+                       <button class="refresh-button" th:if="${order.orderStatus == '已支付'}" th:onclick="'refreshOrder(\'' + ${order.id} + '\', \'' + ${order.userId} + '\')'">刷新</button>
+                    </span></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="pagination">
+            <button class="page-button" onclick="previousPage()" id="previous-page">上一页</button>
+            <span id="page-info">第
+                <span id="current-page" th:attr="data-current-page=${page}">1</span>页 / <span id="total-pages" th:attr="data-total-pages=${totalPages}" th:text="${totalPages}">1</span>页</span>
+            <select id="items-per-page" onchange="changeItemsPerPage()">
+                <option value="10">10条/页</option>
+                <option value="20">20条/页</option>
+                <option value="50">50条/页</option>
+                <option value="100">100条/页</option>
+            </select>
+            <button class="page-button"  onclick="nextPage()" id="next-page">下一页</button>
+        </div>
+    </div>
+    <button id="go-back" class="go-back-button" onclick="goBack()">返回</button>
+</div>
+<script th:src="@{/js/order-script.js}"></script>
+</body>
+</html>

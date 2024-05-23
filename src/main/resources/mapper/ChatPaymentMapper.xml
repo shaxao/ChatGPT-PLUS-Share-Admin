@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.louwei.gptresource.mapper.ChatPaymentMapper">
+
+    <resultMap id="BaseResultMap" type="com.louwei.gptresource.domain.ChatPayment">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="paymentName" column="payment_name" jdbcType="VARCHAR"/>
+            <result property="paymentMethod" column="payment_method" jdbcType="VARCHAR"/>
+            <result property="merchantId" column="merchant_id" jdbcType="VARCHAR"/>
+            <result property="merchantKey" column="merchant_key" jdbcType="VARCHAR"/>
+            <result property="merchantSecret" column="merchant_secret" jdbcType="VARCHAR"/>
+            <result property="paymentScenario" column="payment_scenario" jdbcType="VARCHAR"/>
+            <result property="paymentHandlerRoute" column="payment_handler_route" jdbcType="VARCHAR"/>
+            <result property="isEnabled" column="is_enabled" jdbcType="TINYINT"/>
+            <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+            <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,payment_name,payment_method,
+        merchant_id,merchant_key,merchant_secret,
+        payment_scenario,payment_handler_route,is_enabled,
+        created_at,updated_at
+    </sql>
+</mapper>

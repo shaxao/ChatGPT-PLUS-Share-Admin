@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <title>ChatGPT-like Chat</title>
+</head>
+<body>
+
+<!-- Logo 标志 -->
+<div class="logo-container">
+    <img th:src="@{/images/muhuo-logo.png}" alt="Logo">
+</div>
+
+<div class="login-container">
+    <h2>欢迎回来</h2>
+    <form id="loginForm">
+        <label for="username">用户名:</label>
+        <input type="text" id="username" class="input-text" name="username" required>
+
+        <label for="password">密码:</label>
+        <input type="password" class="input-text" id="password" name="password" required>
+
+        <button type="submit" class="button-confirm">登录</button>
+        <a th:href="@{./resetPassword.html}" id="forgetPassword" class="forget-link">忘记密码?</a></p>
+    </form>
+
+    <p class="register-link">您还没有账号? <a th:href="@{./register.html}" id="registerLink">注册</a></p>
+</div>
+
+<script th:src="@{/js/login.js}"></script>
+</body>
+</html>

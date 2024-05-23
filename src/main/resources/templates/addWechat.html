@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <title>支付页面</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #svg-qrcode {
+            width: 400px;
+            height: 400px;
+            background-color: #fff;
+            border: 0px solid #333;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        #countdown {
+            font-size: 30px;
+            font-weight: 700;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+<div id="getCode" th:attr="data-url=${payUrl}" disabled="disabled"></div>
+<div id="getOrderNo" th:attr="data-url=${orderNo}" disabled="disabled"></div>
+<div class="container text-center">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">请扫描二维码进行支付</h2>
+            <div id="svg-qrcode"></div>
+            <h5 id="countdown" class="card-text mt-4"></h5>
+            <p class="card-text">请保持本页面打开直到支付完成。支付完成后，本页面将自动刷新。</p>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+<script>
+    var payUrl = document.getElementById("getCode").getAttribute("data-url");
+    var orderNo = document.getElementById("getOrderNo").getAttribute("data-url");
+
+    new QRCode(document.getElementById("svg-qrcode"), {
+        text: payUrl,
+        width: 400,
+        height: 400,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H,
+    });
+
+    var timerId;
+
+    var countdown = 5 * 60,
+        display = document.querySelector('#countdown');
+    startTimer(countdown, display);
+
+    var intervalId = setInterval(function() {
+        fetch('/pay/order/checkPaymentStatus?orderNo=' + orderNo, { method: 'GET' })
+            .then(response => response.json())
+            .then(data => {
+                console.log("pay status", data)
+                if (data.data === '已支付') {
+                    refreshPage('支付成功，5秒后自动跳转......！')
+                    clearInterval(intervalId);
+                    clearInterval(timerId);
+                }
+            });
+    }, 1000);
+
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        timerId = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = "剩余时间: " + minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                refreshPage('支付超时，请返回重新购买,5秒后自动跳转......！')
+                clearInterval(timerId);
+            }
+        }, 1000);
+    }
+
+    function refreshPage(text) {
+        document.querySelector('.card-title').textContent = '';
+        document.querySelector('.card-text').textContent = '';
+        document.getElementById("svg-qrcode").style.display = 'none';
+        display.style.color = 'green';
+        display.textContent = text
+        setTimeout(function () {
+            window.history.back();
+        }, 5000);
+    }
+</script>
+
+</body>
+</html>

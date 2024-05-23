@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.louwei.gptresource.mapper.ChatAccessTokenMapper">
+
+    <resultMap id="BaseResultMap" type="com.louwei.gptresource.domain.ChatAccessToken">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="email" column="email" jdbcType="VARCHAR"/>
+            <result property="token" column="token" jdbcType="VARCHAR"/>
+            <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+            <result property="expireDate" column="expire_date" jdbcType="TIMESTAMP"/>
+            <result property="creator" column="creator" jdbcType="VARCHAR"/>
+            <result property="tokenStatus" column="token_status" jdbcType="INTEGER"/>
+            <result property="userCount" column="user_count" jdbcType="INTEGER"/>
+            <result property="sid" column="sid" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,email,token,
+        create_date,expire_date,creator,
+        token_status,user_count,sid
+    </sql>
+</mapper>

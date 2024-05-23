@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <title>ChatGPT-like Chat - Register</title>
+</head>
+<body>
+
+<!-- Logo 标志 -->
+<div class="logo-container">
+    <img th:src="@{/images/muhuo-logo.png}" alt="Logo">
+</div>
+
+<div class="register-container">
+    <h2>创建您的账号</h2>
+    <form id="registerForm">
+        <label for="username">用户名:</label>
+        <div class="input-container">
+            <input type="text" id="username" class="input-text" name="username" placeholder="请输入长度在8以内的中英文字符" required>
+            <div class="validation-icon" id="usernameIcon"></div>
+            <div class="error-message" id="usernameError"></div>
+        </div>
+
+        <label for="password">密码:</label>
+        <div class="input-container">
+            <input type="password" id="password" class="input-text" name="password"  placeholder="密码必须包含至少 8 个字符,包括大写、小写和数字" required>
+            <span class="eye-icon" id="togglePassword">
+                <i class="fas fa-eye" id="eye"></i>
+                <i class="fas fa-eye-slash" id="eye-slash"></i>
+            </span>
+            <div class="validation-icon" id="passwordIcon">
+            </div>
+            <div class="error-message" id="passwordError"></div>
+        </div>
+
+        <label for="phoneOrEmail">电子邮件:</label>
+        <div class="input-container">
+            <input type="text" id="phoneOrEmail" class="input-text" name="phoneOrEmail" required>
+            <div class="validation-icon" id="phoneOrEmailIcon"></div>
+            <div class="error-message" id="phoneOrEmailError"></div>
+        </div>
+
+        <label for="verificationCode">验证码:</label>
+        <div class="input-container">
+            <input type="text"  id="verificationCode" class="ver-text" name="verificationCode" placeholder="输入验证码" required>
+            <button type="button" id="getVerifyCodeBtn" class="ver-button" >获取验证码</button>
+        </div>
+        <div class="validation-icon" id="verificationCodeIcon"></div>
+        <div class="error-message" id="verificationCodeError"></div>
+        <button type="submit" id="registerBtn" class="button-confirm" disabled>注册</button>
+
+
+
+    </form>
+
+    <p class="login-link">已经有帐户? <a th:href="@{login.html}" id="loginLink">登录</a></p>
+</div>
+
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

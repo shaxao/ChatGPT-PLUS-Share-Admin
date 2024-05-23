@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.louwei.gptresource.mapper.ChatUsersMapper">
+
+    <resultMap id="BaseResultMap" type="com.louwei.gptresource.domain.ChatUsers">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="orderId" column="order_id" jdbcType="INTEGER"/>
+            <result property="userEmail" column="user_email" jdbcType="VARCHAR"/>
+            <result property="userPhone" column="user_phone" jdbcType="VARCHAR"/>
+            <result property="userStatus" column="user_status" jdbcType="INTEGER"/>
+            <result property="deleted" column="deleted" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,order_id,user_email,
+        user_phone,user_status,deleted,
+        create_time,update_time
+    </sql>
+
+    <update id="updateUserStatus">
+        update chat_users
+        set user_status = #{userStatus}
+        where id = #{userId}
+    </update>
+
+    <update id="updateUserRole">
+        update users_role
+        set rid = #{rid}
+        where uid = #{userId}
+    </update>
+
+    <select id="findUserIdByEmail" resultType="integer">
+        select id from chat_users where user_email = #{userEmail}
+    </select>
+
+</mapper>
